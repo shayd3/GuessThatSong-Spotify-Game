@@ -29,6 +29,8 @@ $(document).ready(function () {
 
                 _artistTopTracks = data.tracks;
 
+                _artistTopTracks = shuffleArray(_artistTopTracks);
+
                 $.each(_artistTopTracks, function (index, value) {
                     $('#spotify-game').append("<i class='fa fa-play-circle-o play-btn' aria-hidden='true' value='" + index + "'></i>&nbsp&nbsp<input type='text' id='" + index + "' class='form-control' style='width:50%; display:inline-block' placeholder='Guess the song!' > <br>");
 
@@ -96,6 +98,20 @@ $(document).ready(function () {
         wrong = 0;
     });
 })
+
+function shuffleArray(array){
+    var curIndex = array.length, temp, randIndex;
+      while (0 !== curIndex) {
+
+        randIndex = Math.floor(Math.random() * curIndex);
+        curIndex -= 1;
+
+        temp = array[curIndex];
+        array[curIndex] = array[randIndex];
+        array[randIndex] = temp;
+      }
+      return array;
+}
 
 var getPreviewTrack = function (i) {
     return _artistTopTracks[i].preview_url;
