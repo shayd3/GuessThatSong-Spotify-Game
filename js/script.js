@@ -3,7 +3,7 @@ var _artistImg;
 var _artistName;
 var _artistUri;
 var _artistID;
-var _artistTopTracks = [10];
+var _artistTopTracks;
 
 $(document).ready(function(){
     $('#search').click(function(){
@@ -22,10 +22,15 @@ $(document).ready(function(){
             },  
             success: function(response){
                 var data = response;
+                _artistTopTracks = [data.tracks.length];
 
-                for(var i = 0; i < 10; i++){
-                    _artistTopTracks[i] = data.tracks[i]
+                for(var i = 0; i < _artistTopTracks.length; i++){
+                    _artistTopTracks[i] = data.tracks[i];
                 }
+
+                for(var i = 0; i < _artistTopTracks.length; i++)
+                    $('#spotify-game').append("<iframe src='https://embed.spotify.com/?uri=".concat(_artistTopTracks[i].uri,"' width='80' height='80' frameborder='0' allowtransparency='true'></iframe>"));
+
             }
         })
 
