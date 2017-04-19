@@ -5,6 +5,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="css/styles.css" media="screen, projection" rel="stylesheet" type="text/css" />
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="js/script.js"></script>
     </head>
     <body>
         <div class="navbar navbar-black navbar-static-top">
@@ -13,6 +15,22 @@
                     <span class="navbar-logo"></span>
                     <span class="nav-title">Music Guesser</span>
                 </div>
+            </div>
+        </div>
+        <div id="content">
+            <div id="spotify-search" class="container">
+                    <input type="text" id="query" value class="form-control" placeholder="Type an Artist Name">
+                    <input type="submit" id="search" class="btn" value="Search">
+            </div>
+            <div id="spotify-artist-results">
+                <div id="artist-img">
+
+                </div>
+                <div id="artist-info">
+                    
+                </div>
+                <input type="button" id="game-start" class="btn" value="Start Game" style="display: none; margin-left: 0;">
+                <input type="button" id="game-reset" class="btn" value="Restart Game" style="display:none; margin-left:0;">
             </div>
         </div>
     </body>
