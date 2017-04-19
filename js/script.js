@@ -5,6 +5,9 @@ var _artistUri;
 var _artistID;
 var _artistTopTracks;
 var audioObject = null;
+var correct = 0;
+var wrong = 0;
+var score;
 
 $(document).ready(function () {
     $('#search').click(function () {
@@ -27,7 +30,7 @@ $(document).ready(function () {
                 _artistTopTracks = data.tracks;
 
                 $.each(_artistTopTracks, function (index, value) {
-                    $('#spotify-game').append("<i class='fa fa-play-circle-o play-btn' aria-hidden='true' value='" + index + "'></i><br>");
+                    $('#spotify-game').append("<i class='fa fa-play-circle-o play-btn' aria-hidden='true' value='" + index + "'></i>&nbsp&nbsp<input type='text' id='" + index + "' class='form-control' style='width:50%; display:inline-block' placeholder='Guess the song!' > <br>");
 
                     $('#spotify-game').click(function (e) {
                         var target = e.target;
@@ -49,6 +52,27 @@ $(document).ready(function () {
 
                     })
                 })
+                $('#spotify-game').append("<input type='submit' id='submit-answers' class='btn' value='Submit'>")
+                
+                $('#submit-answers').click(function () {
+                    console.log('I was clicked!');
+                    $('#spotify-game input.form-control').each(function (index) {
+                        if ($(this).val().toLowerCase() == _artistTopTracks[index].name.toLowerCase()) {
+                            correct += 1;
+                        }
+                    });
+                    score = correct + "/10";
+                    $('#spotify-game').hide();
+
+                    $('#spotify-game-results').append("<h1>Results</h1>" + 
+                                                      "<h2>Score: " + score + "</h2>"+
+                                                      "<h2>Answers: </h2>");
+                    for(var i = 0; i < _artistTopTracks.length; i++){
+                        $('#spotify-game-results').append("<h3>"+ (i+1) + ".) "+ _artistTopTracks[i].name +"</h3>");
+
+                    }
+                    $('#spotify-game-results').show();
+                });
             }
         });
 
@@ -66,6 +90,10 @@ $(document).ready(function () {
         $('#artist-img').html("");
         $('#artist-info').html("");
         $('#spotify-game').html("");
+        $('#spotify-game-results').html("").hide();
+        score = "";
+        correct = 0;
+        wrong = 0;
     });
 })
 

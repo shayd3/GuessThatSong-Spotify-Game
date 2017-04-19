@@ -121,7 +121,16 @@ body{
   color: white;
   padding-top:20px;
 }
+#spotify-game{
+  margin-top:120px;
+}
 .play-btn{
   color:white;
-  font-size: 20px;
+  font-size: 40px !important;
+}
+
+#spotify-game-results{
+    margin-top: 100px;
+    margin-left: 25px;
+    color: white;
 }
