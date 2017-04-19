@@ -3,6 +3,7 @@ var _artistImg;
 var _artistName;
 var _artistUri;
 var _artistID;
+var _artistTopTracks = [10];
 
 $(document).ready(function(){
     $('#search').click(function(){
@@ -12,6 +13,24 @@ $(document).ready(function(){
     $('#game-start').click(function(){
         $(this).hide();
         $('#game-reset').show();
+
+        $.ajax({
+            url: _baseUrl + "artists/"+ _artistID + '/top-tracks',
+            dataType: "json",
+            data:{
+                country: "US",
+            },  
+            success: function(response){
+                var data = response;
+
+                for(var i = 0; i < 10; i++){
+                    _artistTopTracks[i] = data.tracks[i]
+                }
+            }
+        })
+
+        $('#spotify-game').show();
+
     });
 
     $('#game-reset').click(function(){
@@ -42,10 +61,10 @@ var searchArtists = function (query) {
                 _artistImg = data.artists.items[0].images[0].url;
                 _artistName = data.artists.items[0].name;
                 _artistUri = data.artists.items[0].uri;
-                _aristID = data.artists.items[0].id;
+                _artistID = data.artists.items[0].id;
                 
                 $('#artist-img').append("<img src='".concat(_artistImg,"'/>"));
-                $('#artist-info').append("<h2>".concat(_artistName ,"</h2>"));
+                $('#artist-info').append("<h1>".concat(_artistName ,"</h1>"));
                 $('#query').val("");
                 $('#spotify-search').hide();
                 $('#game-start').show();
